@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Cog\Contracts\Ban\Bannable as BannableInterface;
+use Cog\Laravel\Ban\Traits\Bannable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements BannableInterface
 {
     use HasApiTokens;
     use HasFactory;
@@ -21,6 +24,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     use HasRoles; // Pacote para controlar funções e permissões de usuários (spatie/laravel-permission).
+    use Bannable; // Ban Pacote: p/ banir usuários.
 
     /**
      * The attributes that are mass assignable.
