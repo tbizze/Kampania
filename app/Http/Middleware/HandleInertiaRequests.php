@@ -45,6 +45,12 @@ class HandleInertiaRequests extends Middleware
             'auth.user.permissions' => fn () => $request->user()
                 ? $request->user()->getAllPermissionNames()
                 : null,
+            // Objeto para as Mensagens: 'danger', 'warning', 'success'
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'warning' => fn () => $request->session()->get('warning'),
+                'danger' => fn () => $request->session()->get('danger'),
+            ],
             //
         ]);
     }
