@@ -22,6 +22,7 @@
         "@heroicons/vue": "^1.0.6",
         "daisyui": "^3.7.6",
         "flowbite": "^1.8.1",
-        "flowbite-vue": "^0.0.17-next.8"
+        "flowbite-vue": "^0.0.17-next.8",
+        "uuidv4": "^6.2.13"
     }
 }

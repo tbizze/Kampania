@@ -12,11 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Roda um conjunto de Seeder.
+        $this->call([
+            
+            // Permissões e usuário.
+            PermissionSeeder::class,    //criar funções e permissões
+            UserSeeder::class,          // criar usuários
+            
+            /// Módulo lançamentos.
+            //LctoGrupoSeeder::class,
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        ]);
+
+        //Roda somente uma Seeder específica.
+        //$this->call(UserSeeder::class);
     }
 }
