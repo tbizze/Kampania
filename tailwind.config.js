@@ -33,7 +33,7 @@ export default {
 
     // daisyUI config (optional)
     daisyui: {
-        themes: ["emerald", "dark"],
+        themes: ["fantasy", "dark"],
         /* themes: [
             {
                 mytheme: {

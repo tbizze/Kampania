@@ -117,24 +117,24 @@ function sort(field) {
 
       <!-- #### Header e Body da Tabela -->
       <template #tabBody>
-        <table class="table table-compact">
+        <table class="table">
           <thead class="text-sm uppercase text-gray-700 bg-stone-200">
             <tr>
-              <td class="text-center w-10">#</td>
-              <td class="hover:text-accent cursor-pointer" @click="sort('name')">
+              <th class="text-center w-10">#</th>
+              <th class="hover:text-accent cursor-pointer" @click="sort('name')">
                 <BizTheadOrder :field="form.field" coluna="name" :direction="form.direction"
                 
                 >
                   Nome
                 </BizTheadOrder>
-              </td>
-              <td class="hover:text-accent cursor-pointer" @click="sort('email')">
+              </th>
+              <th class="hover:text-accent cursor-pointer" @click="sort('email')">
                 <BizTheadOrder :field="form.field" coluna="email" :direction="form.direction">
                   E-mail
                 </BizTheadOrder>
-              </td>
-              <td class="text-center">Funções</td>
-              <td class="text-center">Ação</td>
+              </th>
+              <th class="text-center">Funções</th>
+              <th class="text-center">Ação</th>
             </tr>
           </thead>
           <tbody>
@@ -150,7 +150,7 @@ function sort(field) {
                 <span
                   v-for="role in user.roles"
                   :key="role.id"
-                  class="bg-base-300 px-1 py-0.5 text-sm rounded-lg"
+                  class="badge badge-ghost badge-sm"
                   >{{ role.name }}
                 </span>
               </td>

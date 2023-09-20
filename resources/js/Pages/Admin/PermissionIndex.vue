@@ -132,7 +132,7 @@ function sort(field) {
               <td class="">{{ permission.model }}</td>
               <td class="text-center space-x-1">
                 <span v-for="role in permission.roles" :key="role.id"
-                  class="bg-base-300 px-1 py-0.5 text-sm rounded-lg">{{ role.name }}
+                  class="badge badge-ghost badge-sm">{{ role.name }}
                 </span>
               </td>
               <td class="text-center space-x-1 w-24">
