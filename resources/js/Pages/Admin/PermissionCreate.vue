@@ -37,6 +37,7 @@ function cancelSave() {
 </script>
 <template>
   <!-- Carrega o Layout da Aplicação com "Logo e TopMenu, com botões Login/Logout..." -->
+  <Head :title="$props.titulo" />
   <AppLayout :title="props.titulo">
     <!-- #### SEÇÃO: Título da Página -->
     <template #header>
@@ -123,13 +124,10 @@ function cancelSave() {
               <!-- Checkbox com as funções -->
               <div class="md:w-4/5 flex gap-2 items-center">
                 <div v-for="role in roles" :key="role.id">
-  
-
-
-                  <input type="checkbox" v-model="form.roles" :value="role.id" class="w-5 h-5 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" />
-                  <span class="pl-1.5 text-sm">{{ role.name }}</span>
-
-
+                  <input :id="'role_'+role.id" type="checkbox" 
+                    v-model="form.roles" :value="role.id" 
+                    class="w-5 h-5 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" />
+                  <label :for="'role_'+role.id" class="pl-1.5 text-sm">{{ role.name }}</label>
                 </div>
               </div>
             </div>

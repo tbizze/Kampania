@@ -39,6 +39,7 @@ function cancelSave() {
 </script>
 <template>
   <!-- Carrega o Layout da Aplicação com "Logo e TopMenu, com botões Login/Logout..." -->
+  <Head :title="$props.titulo" />
   <AppLayout :title="props.titulo">
     <!-- #### SEÇÃO: Título da Página -->
     <template #header>
