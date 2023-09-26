@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pessoa extends Model
@@ -61,5 +62,14 @@ class Pessoa extends Model
         return $this->belongsToMany(CampPessoaPivot::class,'campanha_pessoa','pessoa_id','campanha_id')
         ->withPivot('dt_adesao','notif_email','notif_whatsapp')    
         ->withTimestamps();
+    }
+
+    /**
+     * A Pessoa 'tem um' (hasOne) Endereço.
+     * Obtenha essa coleção de registros.
+     */
+    public function hasEndereco(): HasOne
+    {
+        return $this->hasOne(PessEndereco::class);
     }
 }

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             CampanhaSeeder::class,
             CampPessoaPivotSeeder::class,
 
-            //PessEnderecoSeeder::class,
+            PessEnderecoSeeder::class,
 
         ]);
 
