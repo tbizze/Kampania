@@ -3,7 +3,10 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CampanhaController;
+use App\Http\Controllers\CampPessoaPivotController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PessoaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -109,4 +112,33 @@ Route::middleware([
         // Deletar
         Route::delete('/{permission}', [PermissionController::class, 'destroy'])->name('admin.permissions.delete');
     });
+
+
+    /**
+     * #### PESSOAS #########################
+     * parameters: 1º argumento => url // 2º argumento => nome modelo.
+     */
+    Route::resource('pessoas', PessoaController::class)
+    ->parameters([
+        'pessoas' => 'pessoa'
+    ]);
+
+    /**
+     * #### GESTÃO CAMPANHAS #########################
+     * parameters: 1º argumento => url // 2º argumento => nome modelo.
+     */
+    //Route::resource('campanhas', CampanhaController::class);
+    Route::resource('gestao-campanhas', CampPessoaPivotController::class)
+    ->parameters([
+        'gestao-campanhas' => 'campPessoaPivot'
+    ]);
+
+    /**
+     * #### PESSOAS #########################
+     * parameters: 1º argumento => url // 2º argumento => nome modelo.
+     */
+    Route::resource('campanhas', CampanhaController::class);
+    /* ->parameters([
+        'lctos' => 'lancamento'
+    ]); */
 });

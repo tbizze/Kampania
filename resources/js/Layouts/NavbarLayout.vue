@@ -23,6 +23,14 @@ const menu_configs = [
 const menu_geral = [
   { href: "/dashboard", label: "Home", icon: HomeIcon, can: "Medio" },
 ];
+
+// MENU: PESSOAS e CAMPANHA
+const menu_pessoas = [
+  { href: "/pessoas", label: "Pessoas", icon: CalendarIcon, can: "Medio" },
+  { href: "/campanhas", label: "Campanha", icon: CubeIcon, can: "Admin" },
+  { href: "/gestao-campanhas", label: "Gerir Campanhas", icon: ChartBarIcon, can: "Medio" },
+];
+
 // MENU: Perfil do usuário
 const menu_perfil = [
   {
@@ -47,6 +55,24 @@ const menu_perfil = [
 
     <!-- Loop dos Links -->
     <div v-for="(item, index) in menu_geral" :key="index">
+      <a :href="item.href" v-if="$page.props.auth.user.roles.includes(item.can)"
+        class="flex items-center p-2 text-base text-gray-300 rounded-lg transition duration-75 hover:text-gray-50 hover:bg-gray-700 group">
+        <component :is="item.icon" class="h-5 w-5 text-gray-300 mr-2 group-hover:text-gray-50" />
+        {{ item.label }}
+      </a>
+    </div>
+  </div>
+
+
+  <!-- #### MENU: PESSOAS -->
+  <div class="mb-10">
+    <!-- Label do Grupo -->
+    <h3 class="mx-2 mb-2 text-xs text-gray-400 uppercase tracking-widest">
+      Campanha
+    </h3>
+
+    <!-- Loop dos Links -->
+    <div v-for="(item, index) in menu_pessoas" :key="index">
       <a :href="item.href" v-if="$page.props.auth.user.roles.includes(item.can)"
         class="flex items-center p-2 text-base text-gray-300 rounded-lg transition duration-75 hover:text-gray-50 hover:bg-gray-700 group">
         <component :is="item.icon" class="h-5 w-5 text-gray-300 mr-2 group-hover:text-gray-50" />
