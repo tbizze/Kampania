@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             CampanhaSeeder::class,
             CampPessoaPivotSeeder::class,
 
+            //PessEnderecoSeeder::class,
+
         ]);
 
         //Roda somente uma Seeder específica.
