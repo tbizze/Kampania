@@ -51,7 +51,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="success"
             closable
-            class="border rounded-md shadow-sm"
+            class="border border-l-4 border-l-green-300 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
 
         <!-- ### Warning: Mensagens de alerta -->
@@ -61,7 +61,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="warning"
             closable
-            class="border rounded-md shadow-sm"
+            class="border border-l-4 border-l-orange-300 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
 
         <!-- ### Danger: Mensagens de erro -->
@@ -71,7 +71,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="danger"
             closable
-            class="border rounded-md shadow-sm"
+            class="border border-l-4 border-l-red-400 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
     </div>
 </template>
