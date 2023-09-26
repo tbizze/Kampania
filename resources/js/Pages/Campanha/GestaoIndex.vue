@@ -161,18 +161,21 @@ onMounted(() => {
               :options="camp_gpos"
               class="z-50 w-40"
               multiple
+              placeholder="Filtrar grupo.."
             />
             <BaseListbox
               v-model="form.camp_sit_id"
               :options="camp_sits"
               class="z-50 w-40"
               multiple
+              placeholder="Filtrar situação.."
             />
             <BaseListbox
               v-model="form.camp_valor"
               :options="camp_valores"
               class="z-50 w-40"
               multiple
+              placeholder="Filtrar valor.."
             />
             <!-- Botão/Ícone para pesquisar -->
             <button class="btn rounded-md btn-sm">

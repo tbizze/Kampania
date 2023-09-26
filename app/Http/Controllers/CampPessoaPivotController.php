@@ -56,6 +56,10 @@ class CampPessoaPivotController extends Controller
         /* if($request->has('search')) {
             $campanhas->where('pessoas.nome', 'like', '%'. $request->search .'%');
         } */
+        
+        //Filtra registros em que a pessoa relacionada tenha sido deletado.
+        $campanhas->where('pessoas.deleted_at', null);
+
         $campanhas->when($request->search, function ($query, $value){
             $query->where('pessoas.nome', 'like', '%' . $value . '%');
         });
