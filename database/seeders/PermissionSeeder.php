@@ -100,7 +100,73 @@ class PermissionSeeder extends Seeder
             'model'         => 'SEG: Permissões',
         ])->syncRoles([$role1]);
 
+        
+        // Acesso a Pessoas
+        Permission::create([
+            'name'          => 'pessoas.index',
+            'description'   => 'Ver Pessoas',
+            'model'         => 'Pessoa',
+        ])->syncRoles([$role1,$role2]);
+        Permission::create([
+            'name'          => 'pessoas.create',
+            'description'   => 'Criar Pessoas',
+            'model'         => 'Pessoa',
+        ])->syncRoles([$role1,$role2]);
+        Permission::create([
+            'name'          => 'pessoas.edit',
+            'description'   => 'Editar Pessoas',
+            'model'         => 'Pessoa',
+        ])->syncRoles([$role1,$role2]);
+        Permission::create([
+            'name'          => 'pessoas.destroy',
+            'description'   => 'Deletar Pessoas',
+            'model'         => 'Pessoa',
+        ])->syncRoles([$role1,$role2]);
 
+
+        // Acesso a Gerir Campanha
+        Permission::create([
+            'name'          => 'gestao_campanhas.index',
+            'description'   => 'Ver Dados Campanha',
+            'model'         => 'CampGerir',
+        ])->syncRoles([$role1,$role2]);
+        Permission::create([
+            'name'          => 'gestao_campanhas.create',
+            'description'   => 'Criar Dados Campanha',
+            'model'         => 'CampGerir',
+        ])->syncRoles([$role1,]);
+        Permission::create([
+            'name'          => 'gestao_campanhas.edit',
+            'description'   => 'Editar Dados Campanha',
+            'model'         => 'CampGerir',
+        ])->syncRoles([$role1,$role2]);
+        Permission::create([
+            'name'          => 'gestao_campanhas.destroy',
+            'description'   => 'Deletar Dados Campanha',
+            'model'         => 'CampGerir',
+        ])->syncRoles([$role1,]);
+
+        // Acesso a Campanha
+        Permission::create([
+            'name'          => 'campanhas.index',
+            'description'   => 'Ver Campanhas',
+            'model'         => 'Campanha',
+        ])->syncRoles([$role1,]);
+        Permission::create([
+            'name'          => 'campanhas.create',
+            'description'   => 'Criar Campanhas',
+            'model'         => 'Campanha',
+        ])->syncRoles([$role1,]);
+        Permission::create([
+            'name'          => 'campanhas.edit',
+            'description'   => 'Editar Campanhas',
+            'model'         => 'Campanha',
+        ])->syncRoles([$role1,]);
+        Permission::create([
+            'name'          => 'campanhas.destroy',
+            'description'   => 'Deletar Campanhas',
+            'model'         => 'Campanha',
+        ])->syncRoles([$role1,]);
         
     }
 }

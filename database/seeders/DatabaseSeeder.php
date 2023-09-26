@@ -19,8 +19,16 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,    //criar funções e permissões
             UserSeeder::class,          // criar usuários
             
-            /// Módulo lançamentos.
-            //LctoGrupoSeeder::class,
+            // Módulo Pessoas.
+            PessEstCivilSeeder::class,
+            PessGpoSeeder::class,
+            PessoaSeeder::class,
+            
+            // Módulo campanha.
+            CampGpoSeeder::class,
+            CampSitSeeder::class,
+            CampanhaSeeder::class,
+            CampPessoaPivotSeeder::class,
 
         ]);
 
