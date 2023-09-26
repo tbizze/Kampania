@@ -3,13 +3,13 @@ import { router, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionPageForm from "@/Components/SectionPageForm.vue";
 
-import BaseListbox from "@/components/Listbox.vue";
-import BizInput from "@/components/BizInput.vue";
-import BizField from "@/components/BizField.vue";
-import BizButtonSave from "../../Components/BizButtonSave.vue";
-import BizButtonCancel from "../../Components/BizButtonCancel.vue";
+import BaseListbox from "@/Components/BizListbox.vue";
+import BizInput from "@/Components/BizInput.vue";
+import BizField from "@/Components/BizField.vue";
+import BizButtonSave from "@/Components/BizButtonSave.vue";
+import BizButtonCancel from "@/Components/BizButtonCancel.vue";
 
-import Checkbox from '@/Components/Checkbox.vue';
+//import Checkbox from '@/Components/Checkbox.vue';
 
 const props = defineProps({
   titulo: "", 
