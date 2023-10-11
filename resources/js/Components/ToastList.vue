@@ -43,7 +43,7 @@ router.on('finish', ()=>{
 })
 </script>
 <template>
-    <div class="fixed top-4 right-4 z-50 space-y-3 w-full max-w-xs ">
+    <div class="fixed top-10 right-10 z-50 space-y-3 w-full max-w-xs ">
         <!-- ### Success: Mensagens de sucesso -->
         <Toast
             v-for="(item, index) in success"
@@ -51,7 +51,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="success"
             closable
-            class="border border-l-4 border-l-green-300 rounded-md shadow-sm"
+            class="border border-l-4 border-l-green-400 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
 
         <!-- ### Warning: Mensagens de alerta -->
@@ -61,7 +61,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="warning"
             closable
-            class="border border-l-4 border-l-orange-300 rounded-md shadow-sm"
+            class="border border-l-4 border-l-orange-400 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
 
         <!-- ### Danger: Mensagens de erro -->
@@ -71,7 +71,7 @@ router.on('finish', ()=>{
             :message="item.message"
             type="danger"
             closable
-            class="border border-l-4 border-l-red-400 rounded-md shadow-sm"
+            class="border border-l-4 border-l-red-500 rounded-md shadow-sm"
         >{{ item.message }}</Toast>
     </div>
 </template>
