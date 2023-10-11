@@ -38,7 +38,20 @@ class StorePessoaRequest extends FormRequest
             'celular' => 'nullable|digits:11',
             'email' => 'nullable|email|max:255',
             'notas' => 'nullable|string|max:255',
-            
+
+            // Regras de validações de Endereços
+            'logradouro' => 'nullable|string|max:130',
+            'numero' => 'nullable|string|max:6',
+            'complemento' => 'nullable|string|max:20',
+            'bairro' => 'nullable|string|max:50',
+            'cep' => 'nullable|string|digits:8',
+            'cidade' => 'nullable|string|max:100',
+            'uf' => 'nullable|string|max:2|min:2',
+            'principal' => 'nullable|boolean',
+            'notas' => 'nullable|string|max:255',
+            'pessoa_id' => 'nullable|integer',
+
+            // Regras de validações de Campanha
             'dt_adesao' => 'nullable|date',
             'dt_encerramento' => 'nullable|date',
             'camp_sit_id' => 'nullable|integer',

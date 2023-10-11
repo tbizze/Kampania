@@ -20,7 +20,7 @@ class PessEndereco extends Model
      * Lista des campos em que é permitido a persistência no BD.. 
      */
     protected $fillable = [
-        'logradouro', 'numero', 'bairro', 'complemento', 'cep', 'cidade', 'uf', 'notas'
+        'logradouro', 'numero', 'bairro', 'complemento', 'cep', 'cidade', 'uf', 'notas','pessoa_id'
     ];
 
     /**

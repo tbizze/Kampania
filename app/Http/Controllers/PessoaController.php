@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use App\Http\Requests\StorePessoaRequest;
+use App\Http\Requests\UpdatePessEnderecoRequest;
 use App\Http\Requests\UpdatePessoaRequest;
 use App\Models\CampGpo;
 use App\Models\CampSit;
+use App\Models\PessEndereco;
 use App\Models\PessEstCivil;
 use App\Models\PessGpo;
+use Hamcrest\Type\IsBoolean;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -77,7 +81,7 @@ class PessoaController extends Controller
         // Renomeia coluna id=>value | nome=>label
         $grupos = PessGpo::get(['id as value', 'nome as label']);
         //$grupos = PessGpo::pluck('nome','id');
-//dd($pessoas,$grupos);
+
         // Renderiza a View Inertia.
         return Inertia::render('Pessoa/Index',[
             'titulo' => $titulo,
@@ -130,32 +134,21 @@ class PessoaController extends Controller
      */
     public function store(StorePessoaRequest $request)
     {
-        //dd($request->getContent());
-
-        // Cria um model com os dados aprovados nas validações...
-        // Persiste o model atualizado no DB.
         DB::transaction(function () use($request) {
+            
+            // Cria um model com os dados aprovados nas validações...
+            // Persiste o model atualizado no DB.
             $pessoa = Pessoa::create($request->validated());
             
-            // Associa Pessoa criada a um grupo de pessoas [1- Campanha].
-            /* $pessoa_id = 1;
-            $pessoa->grupos()->sync($pessoa_id,false); */
-/* dd($request->boolean('notif_email'));
-            if($request->notif_email){
-                dd('teste');
-            }; */
-            
-            // Associa Pessoa criada a um grupo de pessoas [1- Campanha 2022].
-            $campanha_id = 1;
-            $pessoa->campanhaItens()->attach($campanha_id,[
-                'notif_email' => $request->notif_email, 
-                'notif_whatsapp' => $request->notif_whatsapp,
-                'valor' => $request->valor,
-                'dt_adesao' => $request->dt_adesao,
-                'dt_encerramento' => $request->dt_encerramento,
-                'camp_gpo_id' => $request->camp_gpo_id,
-                'camp_sit_id' => $request->camp_sit_id,
-            ]);
+            // Associa a Pessoa criada a um grupo de pessoas [1- Campanha Nova Matriz].
+            $grupo_id = 1;
+            $pessoa->grupos()->sync($grupo_id, false);
+
+            // Chama função para salvar Endereço.
+            $this->saveEndereco($request, $pessoa->hasEndereco, $pessoa->id);
+
+            // Chama função para salvar Campanha.
+            $this->saveCampanha($request, $pessoa);
         });
 
         // Redireciona para index.
@@ -175,7 +168,6 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
-        //dd('edit', $this->mskfone($pessoa->celular));
         // Busca os grupos para passar ao ListBox.
         // Renomeia coluna id=>value | nome=>label
         $list_est_civil = PessEstCivil::get(['id as value', 'nome as label']);
@@ -194,10 +186,7 @@ class PessoaController extends Controller
         ];
 
         // Carrega o relacionamento
-        //$pessoa->load('campanhaItens');
-        //dd($pessoa);
-        
-        //$campanha = Pessoa::with('campanhas');
+        $pessoa->load('hasEndereco');
 
         // Define o título da página.
         $titulo = 'Editar Pessoas';
@@ -219,15 +208,73 @@ class PessoaController extends Controller
      */
     public function update(UpdatePessoaRequest $request, Pessoa $pessoa)
     {
-        //dd('update');
+        try { 
+            DB::transaction(function () use($request, $pessoa) {
 
-        // Carrega no model atual os dados aprovados nas validações, para persistir no DB.
-        $pessoa->fill($request->validated());
-        // Persiste o model atualizado no DB.
-        $pessoa->save();
-
+                // Carrega no model atual os dados aprovados nas validações, para persistir no DB.
+                $pessoa->fill($request->validated());
+                // Persiste o model atualizado no DB.
+                $pessoa->save();
+                // Chama função para salvar endereço.
+                $this->saveEndereco($request, $pessoa->hasEndereco, $pessoa->id);
+    
+            });
+          } catch(\Exception $ex){ 
+            dd($ex->getMessage()); 
+            // Note any method of class PDOException can be called on $ex.
+          }
+        
         // Redireciona para index.
         return redirect()->route('pessoas.index')->with('success', 'Registro atualizado com sucesso!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function saveEndereco($request, PessEndereco $endereco, $pessoa_id)
+    {
+        // Se existe modelo endereço associado ao registro da pessoa corrente, 
+        // isto é, vamos atualizar registro de endereço existente.
+        if ($endereco->exists){
+            // Coloca os valores do formulário no model endereço.
+            $endereco->fill($request->validated());
+            // Persiste o modelo alterado no BD.
+            $endereco->save();
+            
+        // Se naõ existir o modelo,
+        // cria um novo registro para a pessoa corrente.
+        }Else{
+            // Coloca os valores do formulário na varável 'data_endereço'.
+            $data_endereco = $request->validated();
+            // Adiciona o 'id' da pessoa corrente.
+            $data_endereco = Arr::add($data_endereco,'pessoa_id', $pessoa_id);
+            // Persiste o modelo alterado no BD, criando novo registro.
+            $endereco = PessEndereco::create($data_endereco);
+        }
+        // Retorna o model do endereço..
+        //return $endereco;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function saveCampanha($request, Pessoa $pessoa)
+    {
+        
+        // Associa Pessoa criada a uma Campanha já criada [1- Nova Matriz 2022].
+        $campanha_id = 1;
+        $pessoa->campanhaItens()->attach($campanha_id,[
+            'notif_email' => $request->notif_email, 
+            'notif_whatsapp' => $request->notif_whatsapp,
+            'valor' => $request->valor,
+            'dt_adesao' => $request->dt_adesao,
+            'dt_encerramento' => $request->dt_encerramento,
+            'camp_gpo_id' => $request->camp_gpo_id,
+            'camp_sit_id' => $request->camp_sit_id,
+        ]);
+        
+        // Retorna o model do endereço..
+        //return $endereco;
     }
 
     /**

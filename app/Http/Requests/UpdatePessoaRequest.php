@@ -24,7 +24,7 @@ class UpdatePessoaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Regras de validações.
+            // Regras de validações de Pessoas.
             'codigo' => 'nullable|string|max:15',
             'nome' => 'required|string|max:130',
             'dt_nasc' => 'nullable|date',
@@ -38,6 +38,18 @@ class UpdatePessoaRequest extends FormRequest
             'celular' => 'nullable|digits:11',
             'email' => 'nullable|email|max:255',
             'notas' => 'nullable|string|max:255',
+
+            // Regras de validações de Endereços
+            'logradouro' => 'nullable|string|max:130',
+            'numero' => 'nullable|string|max:6',
+            'complemento' => 'nullable|string|max:20',
+            'bairro' => 'nullable|string|max:50',
+            'cep' => 'nullable|string|digits:8',
+            'cidade' => 'nullable|string|max:100',
+            'uf' => 'nullable|string|max:2|min:2',
+            'principal' => 'nullable|boolean',
+            'notas' => 'nullable|string|max:255',
+            'pessoa_id' => 'nullable|integer',
         ];
     }
     protected function prepareForValidation(): void

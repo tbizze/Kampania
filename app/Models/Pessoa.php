@@ -70,6 +70,6 @@ class Pessoa extends Model
      */
     public function hasEndereco(): HasOne
     {
-        return $this->hasOne(PessEndereco::class);
+        return $this->hasOne(PessEndereco::class)->withDefault(['logradouro' => '']);
     }
 }

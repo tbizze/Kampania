@@ -27,7 +27,7 @@ class UpdatePessEnderecoRequest extends FormRequest
             'numero' => 'nullable|string|max:6',
             'complemento' => 'nullable|string|max:20',
             'bairro' => 'nullable|string|max:50',
-            'cep' => 'required|string|max:8',
+            'cep' => 'nullable|string|max:8|min:8',
             'cidade' => 'nullable|string|max:100',
             'uf' => 'nullable|string|max:2',
             'principal' => 'nullable|boolean',
