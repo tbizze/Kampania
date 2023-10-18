@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60f70515b5fec1e4213fa6ac1821e7e1",
+    "content-hash": "5f7dc6b254d459d69cc3c39697825ef9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -114,6 +114,62 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "crthiago/laravel-helpers",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crThiago/laravel-helpers.git",
+                "reference": "2ad46150963a9bc43abd95e099b4267effa2006f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crThiago/laravel-helpers/zipball/2ad46150963a9bc43abd95e099b4267effa2006f",
+                "reference": "2ad46150963a9bc43abd95e099b4267effa2006f",
+                "shasum": ""
+            },
+            "require-dev": {
+                "nunomaduro/phpinsights": "^2.7",
+                "orchestra/testbench": "^8.0"
+            },
+            "type": "helper",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Crthiago\\LaravelHelpers\\LaravelHelpersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Crthiago\\LaravelHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Rodrigues Costa"
+                }
+            ],
+            "description": "Funções e Classes que facilitam o desenvolvimento de aplicações BR desenvolvidas em Laravel.",
+            "keywords": [
+                "classes",
+                "functions",
+                "helpers",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/crThiago/laravel-helpers/issues",
+                "source": "https://github.com/crThiago/laravel-helpers/tree/1.0.1"
+            },
+            "time": "2023-04-08T19:13:36+00:00"
         },
         {
             "name": "cybercog/laravel-ban",
@@ -2334,6 +2390,70 @@
                 }
             ],
             "time": "2023-08-05T12:09:49+00:00"
+        },
+        {
+            "name": "mawuekom/laravel-request-sanitizer",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mawuva/laravel-request-sanitizer.git",
+                "reference": "3d2a4e11851291fecee4661f2eed954571683467"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mawuva/laravel-request-sanitizer/zipball/3d2a4e11851291fecee4661f2eed954571683467",
+                "reference": "3d2a4e11851291fecee4661f2eed954571683467",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.3|^7.4|^8.0|^8.1|^8.2",
+                "symfony/http-foundation": "^4.3.4|>=5.1.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mawuekom\\RequestSanitizer\\RequestSanitizerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mawuekom\\RequestSanitizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Seddor Ephraïm",
+                    "email": "seddorephraim7@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily sanitize your form data",
+            "homepage": "https://github.com/mawuva/laravel-request-sanitizer",
+            "keywords": [
+                "form",
+                "laravel",
+                "laravel-request-sanitizer",
+                "mawuekom",
+                "request",
+                "sanitizer",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/mawuva/laravel-request-sanitizer/issues",
+                "source": "https://github.com/mawuva/laravel-request-sanitizer/tree/v1.2.0"
+            },
+            "time": "2023-09-22T03:16:04+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
