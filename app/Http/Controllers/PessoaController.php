@@ -22,7 +22,7 @@ class PessoaController extends Controller
     public function __construct()
     {
         $this->middleware('can:pessoas.index')->only('index');
-        $this->middleware('can:pessoas.create')->only('create','store');
+        $this->middleware('can:pessoas.create')->only('create', 'store');
         $this->middleware('can:pessoas.edit')->only('edit',);
         $this->middleware('can:pessoas.destroy')->only('destroy');
     }
@@ -48,29 +48,31 @@ class PessoaController extends Controller
         // 2) Instancia o modelo:
         // Se houver relacionamentos => with('roles') ou então query().
         $pessoas = Pessoa::with('grupos');
-        
-        
+
+
         // 3) Aplica filtros a Query:
         // Se passado dados no campo 'search' ==> Pesquisa na coluna 'description'.
-        $pessoas->when($request->search, function ($query, $vl){
+        $pessoas->when($request->search, function ($query, $vl) {
             $query->where('nome', 'like', '%' . $vl . '%');
         });
         // Se passado dados no SelectBox 'grupo_id' ==> Pesquisa os ID's passados.
-        $pessoas->when($request->grupo_id, function ($query, $vl){
+        $pessoas->when($request->grupo_id, function ($query, $vl) {
             $query->whereIn('lcto_grupo_id', $vl);
         });
-        
+
         // 4) Aplica ordem a Query
         // Se acionado alguma coluna de ordenar, realiza o OrderBy.
-        $pessoas->when($request->field, 
-            function ($query, $vl){
+        $pessoas->when(
+            $request->field,
+            function ($query, $vl) {
                 $query->orderBy($vl, request()->direction);
-            }, 
+            },
             // Ordenamento padrão: ID ascendente
-            function ($query, $vl){
+            function ($query, $vl) {
                 $query->orderBy('id', 'desc');
-            });
-        
+            }
+        );
+
         // 5) Executa a Query montada com paginação.
         $pessoas = $pessoas->paginate(10);
 
@@ -83,7 +85,7 @@ class PessoaController extends Controller
         //$grupos = PessGpo::pluck('nome','id');
 
         // Renderiza a View Inertia.
-        return Inertia::render('Pessoa/Index',[
+        return Inertia::render('Pessoa/Index', [
             'titulo' => $titulo,
             'dados' => $pessoas,
             'filters' => $request,
@@ -104,23 +106,23 @@ class PessoaController extends Controller
         $list_est_civil = PessEstCivil::get(['id as value', 'nome as label']);
         $camp_gpos = CampGpo::get(['id as value', 'nome as label']);
         $camp_sits = CampSit::get(['id as value', 'nome as label']);
-        
+
         // Monta os tipos para passar ao ListBox.
         $list_sexos = [
             0 => [
                 'value' => 'M',
                 'label' => 'Masculino',
-            ],[
+            ], [
                 'value' => 'F',
                 'label' => 'Feminino',
-            ]            
+            ]
         ];
 
         // Define o título da página.
         $titulo = 'Criar Pessoas';
 
         // Renderiza a View Inertia.
-        return Inertia::render('Pessoa/Create',[
+        return Inertia::render('Pessoa/Create', [
             'titulo' => $titulo,
             'list_est_civil' => $list_est_civil,
             'list_sexos' => $list_sexos,
@@ -134,22 +136,30 @@ class PessoaController extends Controller
      */
     public function store(StorePessoaRequest $request)
     {
-        DB::transaction(function () use($request) {
-            
-            // Cria um model com os dados aprovados nas validações...
-            // Persiste o model atualizado no DB.
-            $pessoa = Pessoa::create($request->validated());
-            
-            // Associa a Pessoa criada a um grupo de pessoas [1- Campanha Nova Matriz].
-            $grupo_id = 1;
-            $pessoa->grupos()->sync($grupo_id, false);
+        try {
+            DB::transaction(function () use ($request) {
 
-            // Chama função para salvar Endereço.
-            $this->saveEndereco($request, $pessoa->hasEndereco, $pessoa->id);
+                // Cria um model com os dados aprovados nas validações...
+                // Persiste o model atualizado no DB.
+                $pessoa = Pessoa::create($request->validated());
 
-            // Chama função para salvar Campanha.
-            $this->saveCampanha($request, $pessoa);
-        });
+                // Associa a Pessoa criada a um grupo de pessoas [1- Campanha Nova Matriz].
+                $grupo_id = 1;
+                $pessoa->grupos()->sync($grupo_id, false);
+
+                // Chama função para salvar Endereço.
+                $this->saveEndereco($request, $pessoa->hasEndereco, $pessoa->id);
+
+                // Chama função para salvar Campanha.
+                $this->saveCampanha($request, $pessoa);
+            });
+        } catch (\Exception $ex) {
+            //dd($ex->getMessage());
+            // Note any method of class PDOException can be called on $ex.
+
+            // Volta para a página do formulário.
+            return redirect()->back()->with('danger', 'Não foi possível salvar. Favor, verificar!');
+        }
 
         // Redireciona para index.
         return redirect()->route('pessoas.index')->with('success', 'Registro criado com sucesso!');
@@ -168,21 +178,23 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
+        //dd($pessoa, $pessoa->celular, $pessoa->formatted_celular);
+
         // Busca os grupos para passar ao ListBox.
         // Renomeia coluna id=>value | nome=>label
         $list_est_civil = PessEstCivil::get(['id as value', 'nome as label']);
         $camp_gpos = CampGpo::get(['id as value', 'nome as label']);
         $camp_sits = CampSit::get(['id as value', 'nome as label']);
-        
+
         // Monta os tipos para passar ao ListBox.
         $list_sexos = [
             0 => [
                 'value' => 'M',
                 'label' => 'Masculino',
-            ],[
+            ], [
                 'value' => 'F',
                 'label' => 'Feminino',
-            ]            
+            ]
         ];
 
         // Carrega o relacionamento
@@ -192,7 +204,7 @@ class PessoaController extends Controller
         $titulo = 'Editar Pessoas';
 
         // Renderiza a View Inertia.
-        return Inertia::render('Pessoa/Edit',[
+        return Inertia::render('Pessoa/Edit', [
             'titulo' => $titulo,
             'registro' => $pessoa,
             'list_est_civil' => $list_est_civil,
@@ -208,8 +220,8 @@ class PessoaController extends Controller
      */
     public function update(UpdatePessoaRequest $request, Pessoa $pessoa)
     {
-        try { 
-            DB::transaction(function () use($request, $pessoa) {
+        try {
+            DB::transaction(function () use ($request, $pessoa) {
 
                 // Carrega no model atual os dados aprovados nas validações, para persistir no DB.
                 $pessoa->fill($request->validated());
@@ -217,13 +229,15 @@ class PessoaController extends Controller
                 $pessoa->save();
                 // Chama função para salvar endereço.
                 $this->saveEndereco($request, $pessoa->hasEndereco, $pessoa->id);
-    
             });
-          } catch(\Exception $ex){ 
-            dd($ex->getMessage()); 
+        } catch (\Exception $ex) {
+            //dd($ex->getMessage());
             // Note any method of class PDOException can be called on $ex.
-          }
-        
+
+            // Volta para a página do formulário.
+            return redirect()->back()->with('danger', 'Não foi possível salvar. Favor, verificar!');
+        }
+
         // Redireciona para index.
         return redirect()->route('pessoas.index')->with('success', 'Registro atualizado com sucesso!');
     }
@@ -235,24 +249,26 @@ class PessoaController extends Controller
     {
         // Se existe modelo endereço associado ao registro da pessoa corrente, 
         // isto é, vamos atualizar registro de endereço existente.
-        if ($endereco->exists){
+        if ($endereco->exists) {
             // Coloca os valores do formulário no model endereço.
             $endereco->fill($request->validated());
+
+            //$endereco->pessoa_id = null;
+
             // Persiste o modelo alterado no BD.
             $endereco->save();
-            
-        // Se naõ existir o modelo,
-        // cria um novo registro para a pessoa corrente.
-        }Else{
+
+            // Se naõ existir o modelo,
+            // cria um novo registro para a pessoa corrente.
+        } else {
             // Coloca os valores do formulário na varável 'data_endereço'.
             $data_endereco = $request->validated();
             // Adiciona o 'id' da pessoa corrente.
-            $data_endereco = Arr::add($data_endereco,'pessoa_id', $pessoa_id);
+            $data_endereco = Arr::add($data_endereco, 'pessoa_id', $pessoa_id);
+
             // Persiste o modelo alterado no BD, criando novo registro.
             $endereco = PessEndereco::create($data_endereco);
         }
-        // Retorna o model do endereço..
-        //return $endereco;
     }
 
     /**
@@ -260,11 +276,10 @@ class PessoaController extends Controller
      */
     public function saveCampanha($request, Pessoa $pessoa)
     {
-        
         // Associa Pessoa criada a uma Campanha já criada [1- Nova Matriz 2022].
         $campanha_id = 1;
-        $pessoa->campanhaItens()->attach($campanha_id,[
-            'notif_email' => $request->notif_email, 
+        $pessoa->campanhaItens()->attach($campanha_id, [
+            'notif_email' => $request->notif_email,
             'notif_whatsapp' => $request->notif_whatsapp,
             'valor' => $request->valor,
             'dt_adesao' => $request->dt_adesao,
@@ -272,9 +287,6 @@ class PessoaController extends Controller
             'camp_gpo_id' => $request->camp_gpo_id,
             'camp_sit_id' => $request->camp_sit_id,
         ]);
-        
-        // Retorna o model do endereço..
-        //return $endereco;
     }
 
     /**
@@ -285,7 +297,7 @@ class PessoaController extends Controller
         //dd('destroy');
         // Exclui do DB o registro.
         $pessoa->delete();
-        
+
         // Redireciona para index.
         return redirect()->route('pessoas.index')->with('danger', 'Registro excluído com sucesso!');
     }

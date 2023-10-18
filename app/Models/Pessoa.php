@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,6 +35,18 @@ class Pessoa extends Model
         'dt_adesao' => 'date:d/m/Y',
     ];
 
+    protected $appends = [
+        'formatted_celular',
+    ];
+
+    protected function formattedCelular(): Attribute
+    {
+        return Attribute::make(
+            //get: fn() => mask_phone($this->celular),
+            get: fn() => mask_phone($this->celular ? $this->celular : ''),
+        );
+    }
+
     /**
      * A Pessoa 'pertence a um' Estado Civil. 
      * Obtenha esse registro.
@@ -59,9 +72,9 @@ class Pessoa extends Model
      */
     public function campanhaItens(): BelongsToMany
     {
-        return $this->belongsToMany(CampPessoaPivot::class,'campanha_pessoa','pessoa_id','campanha_id')
-        ->withPivot('dt_adesao','notif_email','notif_whatsapp')    
-        ->withTimestamps();
+        return $this->belongsToMany(Campanha::class,'campanha_pessoa');
+        /* ->withPivot('dt_adesao','notif_email','notif_whatsapp')    
+        ->withTimestamps(); */
     }
 
     /**

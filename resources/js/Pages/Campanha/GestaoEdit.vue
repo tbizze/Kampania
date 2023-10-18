@@ -3,13 +3,15 @@ import { router, useForm, Head } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionPageForm from "@/Components/SectionPageForm.vue";
 
-import BaseListbox from "@/Components/BizListbox.vue";
+import BaseListbox from "@/Components/BizListBox.vue";
 import BizInput from "@/Components/BizInput.vue";
 import BizField from "@/Components/BizField.vue";
 import BizButtonSave from "@/Components/BizButtonSave.vue";
 import BizButtonCancel from "@/Components/BizButtonCancel.vue";
 
 import Checkbox from '@/Components/Checkbox.vue';
+
+import { vMaska } from "maska"
 
 const props = defineProps({
   titulo: "",
@@ -87,7 +89,7 @@ function cancelSave() {
           <!-- Campo Código -->
           <div class="md:w-1/5">
             <label class="text-sm text-gray-700">Celular</label>
-            <span class=" block">{{ registro.to_pessoa.celular }}</span>
+            <span class=" block">{{ registro.to_pessoa.formatted_celular }}</span>
           </div>
 
           <!-- Campo Nome -->
@@ -104,19 +106,19 @@ function cancelSave() {
               <!-- Campo Código -->
               <div class="md:w-1/5">
                 <BizField id="dt_adesao" label="Dt. Adesão" :error="form.errors.dt_adesao">
-                  <BizInput v-model="form.dt_adesao" placeholder="Digitar uma data" type="text" />
+                  <BizInput v-model="form.dt_adesao" placeholder="Digitar uma data" type="text" v-maska data-maska="##/##/####" />
                 </BizField>
               </div>
               <!-- Campo Nome -->
               <div class="md:w-1/5">
                 <BizField id="dt_encerramento" label="Dt. Encerramento" :error="form.errors.dt_encerramento">
-                  <BizInput v-model="form.dt_encerramento" placeholder="Digitar uma data" type="text" />
+                  <BizInput v-model="form.dt_encerramento" placeholder="Digitar uma data" type="text" v-maska data-maska="##/##/####" />
                 </BizField>
               </div>
               <!-- Campo Nome -->
               <div class="md:w-1/5">
                 <BizField id="valor" label="Valor" :error="form.errors.valor">
-                  <BizInput v-model="form.valor" placeholder="Digitar um valor" type="text" />
+                  <BizInput v-model="form.valor" placeholder="Digitar um valor" type="text" v-maska data-maska="0,99" data-maska-tokens="0:\d:multiple|9:\d:optional" />
                 </BizField>
               </div>
               <!-- Campo Estado Civil -->

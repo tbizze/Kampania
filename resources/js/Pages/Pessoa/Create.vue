@@ -11,6 +11,8 @@ import BizButtonCancel from "@/Components/BizButtonCancel.vue";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 
+import { vMaska } from "maska"
+
 const props = defineProps({
   titulo: "",
   list_est_civil: Object,
@@ -137,6 +139,7 @@ function cancelSave() {
               </div>
               <!-- PAINEL: Dados Pessoais -->
               <TabPanel class="pt-5">
+
                 <div class="md:flex gap-2 mb-4">
                   <!-- Campo Código -->
                   <div class="md:w-1/5">
@@ -177,6 +180,7 @@ function cancelSave() {
                         v-model="form.celular"
                         placeholder="Digite um celular"
                         type="text"
+                        v-maska data-maska="['(##) ####-####','(##) #####-####']"
                       />
                     </BizField>
                   </div>
@@ -222,7 +226,7 @@ function cancelSave() {
                       :error="form.errors.pess_est_civil_id"
                     />
                   </div>
-                  <!-- Campo tipo -->
+                  <!-- Campo Dt. Nasc. -->
                   <div class="md:w-3/4">
                     <BizField
                       id="dt_nasc"
@@ -233,10 +237,11 @@ function cancelSave() {
                         v-model="form.dt_nasc"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
-                  <!-- Campo tipo -->
+                  <!-- Campo Dt. Casamento -->
                   <div class="md:w-3/4">
                     <BizField
                       id="dt_casamento"
@@ -247,13 +252,14 @@ function cancelSave() {
                         v-model="form.dt_casamento"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
                 </div>
 
                 <div class="md:flex gap-2 mb-4">
-                  <!-- Campo Código -->
+                  <!-- Campo Profissão -->
                   <div class="md:w-1/5">
                     <BizField
                       id="profissao"
@@ -371,6 +377,7 @@ function cancelSave() {
                         v-model="form.cep"
                         placeholder="Digite um cep"
                         type="text"
+                        v-maska data-maska="#####-###"
                       />
                     </BizField>
                   </div>
@@ -392,13 +399,14 @@ function cancelSave() {
                       />
                     </BizField>
                   </div>
-                  <!-- Campo número -->
+                  <!-- Campo Estado -->
                   <div class="md:w-1/6">
                     <BizField id="uf" label="Estado" :error="form.errors.uf">
                       <BizInput
                         v-model="form.uf"
                         placeholder="Digite um estado"
                         type="text"
+                        v-maska data-maska="@@"
                       />
                     </BizField>
                   </div>
@@ -421,6 +429,7 @@ function cancelSave() {
                         v-model="form.dt_adesao"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
@@ -434,6 +443,7 @@ function cancelSave() {
                         v-model="form.valor"
                         placeholder="Digite um valor"
                         type="text"
+                        v-maska data-maska="0,99" data-maska-tokens="0:\d:multiple|9:\d:optional"
                       />
                     </BizField>
                   </div>

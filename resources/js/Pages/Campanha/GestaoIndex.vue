@@ -10,7 +10,7 @@ import BizButtonCreate from "../../Components/BizButtonCreate.vue";
 import BizButtonEdit from "../../Components/BizButtonEdit.vue";
 import BizButtonDelete from "../../Components/BizButtonDelete.vue";
 import BizTheadOrder from "../../Components/BizTheadOrder.vue";
-import BaseListbox from "@/components/BizListbox.vue";
+import BaseListbox from "@/Components/BizListBox.vue";
 
 import { SearchIcon, ArrowRightIcon } from "@heroicons/vue/solid";
 
@@ -204,7 +204,7 @@ onMounted(() => {
                 </BizTheadOrder>
               </th>
               <th class="text-center">Código</th>
-              <th class="text-rigth">Valor</th>
+              <th class="text-right">Valor</th>
               <th class="text-center">Dt. Adesão</th>
               <th class="text-center">Dt. Encerramento</th>
               <th class="text-center">Grupo</th>
@@ -219,17 +219,17 @@ onMounted(() => {
               class="hover:bg-gray-100"
             >
               <td class="border-b text-center w-10">{{ item.id }}</td>
-              <!-- <td class="border-b ">{{ item.to_pessoa.nome }}</td> -->
-              <td class="border-b">{{ item.nome }}</td>
-              <!-- <td class="border-b text-center">{{ item.to_pessoa.codigo }}</td> -->
-              <td class="border-b text-center">{{ item.codigo }}</td>
-              <td class="border-b text-rigth">{{ item.valor }}</td>
-              <td class="border-b text-center">{{ formataData(item.dt_adesao) }}</td>
-              <td class="border-b text-center">{{ formataData(item.dt_encerramento) }}</td>
-              <!-- <td class="border-b text-center">{{ item.to_grupo.nome }}</td> -->
-              <td class="border-b text-center">{{ item.nome_grupo }}</td>
-              <!-- <td class="border-b text-center">{{ item.to_situacao.nome }}</td> -->
-              <td class="border-b text-center">{{ item.nome_sit }}</td>
+              <td class="border-b ">{{ item.to_pessoa.nome }}</td>
+              <!-- <td class="border-b">{{ item.nome }}</td> -->
+              <td class="border-b text-center">{{ item.to_pessoa.codigo }}</td>
+              <!-- <td class="border-b text-center">{{ item.codigo }}</td> -->
+              <td class="border-b text-right">{{ item.valor }}</td>
+              <td class="border-b text-center">{{ item.dt_adesao }}</td>
+              <td class="border-b text-center">{{ item.dt_encerramento }}</td>
+              <td class="border-b text-center">{{ item.to_grupo.nome }}</td>
+              <!-- <td class="border-b text-center">{{ item.nome_grupo }}</td> -->
+              <td class="border-b text-center">{{ item.to_situacao.nome }}</td>
+              <!-- <td class="border-b text-center">{{ item.nome_sit }}</td> -->
               <td class="border-b space-x-1 w-24 text-center">
                 <BizButtonEdit
                   @click.prevent="actionEdit(item.id)"
