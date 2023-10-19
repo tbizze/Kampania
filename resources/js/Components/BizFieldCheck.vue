@@ -1,7 +1,7 @@
 <script setup>
-import Label from "@/components/BizLabel.vue";
-import ErrorMessage from "@/components/BizErrorMessage.vue";
-import HelperMessage from "@/components/BizHelperMessage.vue";
+import Label from "@/Components/BizLabel.vue";
+import ErrorMessage from "@/Components/BizErrorMessage.vue";
+import HelperMessage from "@/Components/BizHelperMessage.vue";
 import {v4 as uuid} from "uuid";
 import {computed, provide} from "vue";
 

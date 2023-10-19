@@ -11,6 +11,8 @@ import BizButtonCancel from "@/Components/BizButtonCancel.vue";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 
+import { vMaska } from "maska"
+
 const props = defineProps({
   titulo: "",
   registro: Object,
@@ -167,6 +169,7 @@ function cancelSave() {
                           v-model="form.celular"
                           placeholder="Digite um celular"
                           type="text"
+                          v-maska data-maska="['(##) ####-####','(##) #####-####']"
                         />
                       </BizField>
                     </div>
@@ -225,6 +228,7 @@ function cancelSave() {
                           v-model="form.dt_nasc"
                           placeholder="Digite uma data"
                           type="text"
+                          v-maska data-maska="##/##/####"
                         />
                       </BizField>
                     </div>
@@ -239,6 +243,7 @@ function cancelSave() {
                           v-model="form.dt_casamento"
                           placeholder="Digite uma data"
                           type="text"
+                          v-maska data-maska="##/##/####"
                         />
                       </BizField>
                     </div>
@@ -363,6 +368,7 @@ function cancelSave() {
                           v-model="form.cep"
                           placeholder="Digite um cep"
                           type="text"
+                          v-maska data-maska="#####-###"
                         />
                       </BizField>
                     </div>
@@ -391,6 +397,7 @@ function cancelSave() {
                           v-model="form.uf"
                           placeholder="Digite um estado"
                           type="text"
+                          v-maska data-maska="@@"
                         />
                       </BizField>
                     </div>

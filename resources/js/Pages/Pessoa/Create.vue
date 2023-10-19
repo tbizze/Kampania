@@ -11,6 +11,8 @@ import BizButtonCancel from "@/Components/BizButtonCancel.vue";
 
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 
+import { vMaska } from "maska"
+
 const props = defineProps({
   titulo: "",
   list_est_civil: Object,
@@ -177,6 +179,7 @@ function cancelSave() {
                         v-model="form.celular"
                         placeholder="Digite um celular"
                         type="text"
+                        v-maska data-maska="['(##) ####-####','(##) #####-####']"
                       />
                     </BizField>
                   </div>
@@ -233,6 +236,7 @@ function cancelSave() {
                         v-model="form.dt_nasc"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
@@ -247,6 +251,7 @@ function cancelSave() {
                         v-model="form.dt_casamento"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
@@ -371,6 +376,7 @@ function cancelSave() {
                         v-model="form.cep"
                         placeholder="Digite um cep"
                         type="text"
+                        v-maska data-maska="#####-###"
                       />
                     </BizField>
                   </div>
@@ -399,6 +405,7 @@ function cancelSave() {
                         v-model="form.uf"
                         placeholder="Digite um estado"
                         type="text"
+                        v-maska data-maska="@@"
                       />
                     </BizField>
                   </div>
@@ -421,6 +428,7 @@ function cancelSave() {
                         v-model="form.dt_adesao"
                         placeholder="Digite uma data"
                         type="text"
+                        v-maska data-maska="##/##/####"
                       />
                     </BizField>
                   </div>
@@ -434,6 +442,7 @@ function cancelSave() {
                         v-model="form.valor"
                         placeholder="Digite um valor"
                         type="text"
+                        v-maska data-maska="0,99" data-maska-tokens="0:\d:multiple|9:\d:optional"
                       />
                     </BizField>
                   </div>

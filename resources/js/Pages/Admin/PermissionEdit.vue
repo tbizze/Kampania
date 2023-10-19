@@ -3,8 +3,8 @@ import { Head, Link, router, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionPageForm from "@/Components/SectionPageForm.vue";
 
-import BizInput from "@/components/BizInput.vue";
-import BizField from "@/components/BizField.vue";
+import BizInput from "@/Components/BizInput.vue";
+import BizField from "@/Components/BizField.vue";
 import BizButtonSave from "../../Components/BizButtonSave.vue";
 import BizButtonCancel from "../../Components/BizButtonCancel.vue";
 

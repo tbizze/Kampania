@@ -3,7 +3,7 @@ import { router, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionPageForm from "@/Components/SectionPageForm.vue";
 
-import BaseListbox from "@/Components/BizListbox.vue";
+import BaseListbox from "@/Components/BizListBox.vue";
 import BizInput from "@/Components/BizInput.vue";
 import BizField from "@/Components/BizField.vue";
 import BizButtonSave from "@/Components/BizButtonSave.vue";
