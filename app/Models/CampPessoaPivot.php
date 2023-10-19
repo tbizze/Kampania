@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,7 +36,27 @@ class CampPessoaPivot extends Model
     ];
 
     /**
-     * A Campanha 'pertence a uma' Campanha. 
+     * Cria uma nova propriedade que é acrescentada às diretas do BD.
+     * É passado em um array os nomes das propriedades desejadas.
+    */
+    protected $appends = [
+        //'formatted_valor',
+    ];
+
+    /**
+     * Altera o atributo criado em $appends, passando valor do BD 
+     * e retorna novo valor mascarado com a função mask_phone().
+    */
+    protected function valor(): Attribute
+    {
+        return Attribute::make(
+            // A função money pede um valor numérico. Para evitar erro, se for null então passa 0.
+            get: fn ($value) => money($value ? $value : 0, false, 2, ',', false),
+        );
+    }
+
+    /**
+     * A Campanha 'pertence a uma' Pessoa. 
      * Obtenha esse registro.
      */
     public function toPessoa(): BelongsTo
@@ -53,7 +74,7 @@ class CampPessoaPivot extends Model
     }
 
     /**
-     * A Pessoa 'pertence a uma' Situação. 
+     * A Campanha 'pertence a uma' Situação. 
      * Obtenha esse registro.
      */
     public function toSituacao(): BelongsTo

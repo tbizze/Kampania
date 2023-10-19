@@ -4,9 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Mawuekom\RequestSanitizer\Traits\InputSanitizer;
 
 class UpdateCampPessoaPivotRequest extends FormRequest
 {
+    // Pacote para tratar inputs (Mawuekom\RequestSanitizer). 
+    use InputSanitizer; 
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -34,9 +38,15 @@ class UpdateCampPessoaPivotRequest extends FormRequest
         ];
     }
 
+    /**
+     * Método para preparar os dados do request para a validação.
+     */
     protected function prepareForValidation(): void
     {
-        if (!$this->notif_email) {
+        // Invoca função para sanitizar Inputs
+        $this ->sanitize();
+
+        /* if (!$this->notif_email) {
             $this->merge([
                 'notif_email' => false,
             ]);
@@ -64,6 +74,18 @@ class UpdateCampPessoaPivotRequest extends FormRequest
                     'dt_encerramento' => $new_data,
                 ]);
             }
-        }
+        } */
     }
+
+    /**
+     * Propriedade protegida para definir quais atributos do request serão tratados antes da validação.
+     * Usa o pacote 'Mawuekom\RequestSanitizer'. 
+     */
+    protected $sanitizers = [
+        'dt_encerramento' => [\Mawuekom\RequestSanitizer\Sanitizers\DateMask::class],
+        'dt_adesao' => [\Mawuekom\RequestSanitizer\Sanitizers\DateMask::class],
+        'notif_email' => [\Mawuekom\RequestSanitizer\Sanitizers\SanitBoolFalse::class],
+        //'notif_whatsapp' => [\Mawuekom\RequestSanitizer\Sanitizers\SanitBoolFalse::class],
+        'valor' => [\Mawuekom\RequestSanitizer\Sanitizers\CurrencyMask::class],
+     ];  
 }
