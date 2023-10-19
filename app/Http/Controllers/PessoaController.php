@@ -134,6 +134,7 @@ class PessoaController extends Controller
      */
     public function store(StorePessoaRequest $request)
     {
+        try {
         DB::transaction(function () use($request) {
             
             // Cria um model com os dados aprovados nas validações...
@@ -150,6 +151,13 @@ class PessoaController extends Controller
             // Chama função para salvar Campanha.
             $this->saveCampanha($request, $pessoa);
         });
+        } catch (\Exception $ex) {
+            //dd($ex->getMessage());
+            // Note any method of class PDOException can be called on $ex.
+
+            // Volta para a página do formulário.
+            return redirect()->back()->with('danger', 'Não foi possível salvar. Favor, verificar!');
+        }
 
         // Redireciona para index.
         return redirect()->route('pessoas.index')->with('success', 'Registro criado com sucesso!');
@@ -220,8 +228,11 @@ class PessoaController extends Controller
     
             });
           } catch(\Exception $ex){ 
-            dd($ex->getMessage()); 
+            //dd($ex->getMessage()); 
             // Note any method of class PDOException can be called on $ex.
+            
+            // Volta para a página do formulário.
+            return redirect()->back()->with('danger', 'Não foi possível salvar. Favor, verificar!');
           }
         
         // Redireciona para index.
