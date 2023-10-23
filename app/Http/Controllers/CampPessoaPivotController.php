@@ -195,7 +195,7 @@ class CampPessoaPivotController extends Controller
      */
     public function update(UpdateCampPessoaPivotRequest $request, CampPessoaPivot $campPessoaPivot)
     {
-        //dd('update',$request);
+        //dd('update',$request->all());
 
         // Carrega no model atual os dados aprovados nas validações, para persistir no DB.
         $campPessoaPivot->fill($request->validated());

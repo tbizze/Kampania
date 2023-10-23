@@ -134,6 +134,8 @@ class PessoaController extends Controller
      */
     public function store(StorePessoaRequest $request)
     {
+        //dd($request->all());
+
         try {
         DB::transaction(function () use($request) {
             
@@ -216,6 +218,8 @@ class PessoaController extends Controller
      */
     public function update(UpdatePessoaRequest $request, Pessoa $pessoa)
     {
+        //dd($request->all());
+
         try { 
             DB::transaction(function () use($request, $pessoa) {
 

@@ -80,7 +80,7 @@ class Pessoa extends Model
      */
     public function campanhaItens(): BelongsToMany
     {
-        return $this->belongsToMany(CampPessoaPivot::class,'campanha_pessoa')->withTimestamps();
+        return $this->belongsToMany(CampPessoaPivot::class,'campanha_pessoa','pessoa_id','campanha_id')->withTimestamps();
         /* return $this->belongsToMany(CampPessoaPivot::class,'campanha_pessoa','pessoa_id','campanha_id')
         ->withPivot('dt_adesao','notif_email','notif_whatsapp')    
         ->withTimestamps(); */
