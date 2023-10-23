@@ -44,14 +44,13 @@ class CampPessoaPivot extends Model
     ];
 
     /**
-     * Altera o atributo criado em $appends, passando valor do BD 
-     * e retorna novo valor mascarado com a função mask_phone().
+     * Altera o atributo do BD 
+     * retorna novo valor mascarado com a função currency_get_db().
     */
     protected function valor(): Attribute
     {
         return Attribute::make(
-            // A função money pede um valor numérico. Para evitar erro, se for null então passa 0.
-            get: fn ($value) => money($value ? $value : 0, false, 2, ',', false),
+            get: fn ($value) => currency_get_db($value),
         );
     }
 
