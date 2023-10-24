@@ -21,16 +21,16 @@ const props = defineProps({
   titulo: "",
   dados: Object,
   filters: Object,
-  camp_gpos: Object,
+  /* camp_gpos: Object,
   camp_sits: Object,
-  camp_valores: Object,
+  camp_valores: Object, */
 });
 
 const form = useForm({
   // grupo_id: [],
-  camp_gpo_id: props.filters.camp_gpo_id,
+  /* camp_gpo_id: props.filters.camp_gpo_id,
   camp_sit_id: props.filters.camp_sit_id,
-  camp_valor: props.filters.camp_valor,
+  camp_valor: props.filters.camp_valor, */
   search: props.filters.search,
   field: props.filters.field,
   direction: props.filters.direction,
@@ -38,20 +38,20 @@ const form = useForm({
 
 // Função para submeter o formulário de pesquisa.
 function submit() {
-  router.get(route("gestao-campanhas.index"), form);
+  router.get(route("contribuicoes.index"), form);
 }
 /**
  * Função para abrir formulário de cadastro.
  */
 function actionAdd() {
-  router.get(route("gestao-campanhas.create"));
+  router.get(route("contribuicoes.create"));
 }
 /**
  * Função para editar um registro.
  * Como parâmetro recebe o ID.
  */
 function actionEdit(id) {
-  router.get(route("gestao-campanhas.edit", id));
+  router.get(route("contribuicoes.edit", id));
 }
 /**
  * Função para deletar um registro.
@@ -59,7 +59,7 @@ function actionEdit(id) {
  * Após requisitar ao controller, fecha modal.
  */
 function actionDelete(id) {
-  router.delete(route("gestao-campanhas.destroy", id)); // Requisita ao controller a exclusão.
+  router.delete(route("contribuicoes.destroy", id)); // Requisita ao controller a exclusão.
   isShowModal.value = false; // Fecha a modal.
 }
 
@@ -123,7 +123,7 @@ onMounted(() => {
         @click.prevent="actionAdd"
         label="Cadastrar"
         v-if="
-          $page.props.auth.user.permissions.includes('gestao_campanhas.create')
+          $page.props.auth.user.permissions.includes('contribuicoes.create')
         "
       />
     </template>
@@ -147,7 +147,7 @@ onMounted(() => {
                 placeholder="Procurar"
               />
             </div>
-            <BaseListbox
+            <!-- <BaseListbox
               v-model="form.camp_gpo_id"
               :options="camp_gpos"
               class="z-50 w-40"
@@ -167,7 +167,7 @@ onMounted(() => {
               class="z-50 w-40"
               multiple
               placeholder="Filtrar valor.."
-            />
+            /> -->
             <!-- Botão/Ícone para pesquisar -->
             <button class="btn rounded-md btn-sm">
               <component :is="ArrowRightIcon" class="h-4 w-4" />
@@ -182,20 +182,7 @@ onMounted(() => {
           <thead class="text-sm uppercase text-gray-700 bg-stone-200">
             <tr>
               <th class="text-center w-10">#</th>
-              <th
-                class="hover:text-accent cursor-pointer"
-                @click="sort('nome')"
-              >
-                <BizTheadOrder
-                  :field="form.field"
-                  coluna="nome"
-                  :direction="form.direction"
-                >
-                  Nome
-                </BizTheadOrder>
-              </th>
-              <th class="text-center">Código</th>
-              <!-- <th class="text-right">Valor</th> -->
+              <th class="text-center">Perído</th>
               <th
                 class="hover:text-accent cursor-pointer text-right"
                 @click="sort('valor')"
@@ -208,21 +195,11 @@ onMounted(() => {
                   Valor
                 </BizTheadOrder>
               </th>
-              <th
-                class="hover:text-accent cursor-pointer"
-                @click="sort('dt_adesao')"
-              >
-                <BizTheadOrder
-                  :field="form.field"
-                  coluna="dt_adesao"
-                  :direction="form.direction"
-                >
-                  Dt. Adesão
-                </BizTheadOrder>
-              </th>
-              <th class="text-center">Dt. Encerramento</th>
-              <th class="text-center">Grupo</th>
-              <th class="text-center">Situação</th>
+              <th class="">Nome</th>
+              <th class="text-center">Dt. Operacão</th>
+              <th class="text-right">Val. Operação</th>
+              <th class="text-center">Conta</th>
+              <th class="text-center">Tipo Operação</th>
               <th class="text-center">Ação</th>
             </tr>
           </thead>
@@ -233,19 +210,19 @@ onMounted(() => {
               class="hover:bg-gray-100"
             >
               <td class="border-b text-center w-10">{{ item.id }}</td>
-              <td class="border-b ">{{ item.to_pessoa.nome }}</td>
-              <td class="border-b text-center">{{ item.to_pessoa.codigo }}</td>
+              <td class="border-b text-center">{{ item.periodo }}</td>
               <td class="border-b text-right">{{ item.valor }}</td>
-              <td class="border-b text-center">{{ item.dt_adesao }}</td>
-              <td class="border-b text-center">{{ item.dt_encerramento }}</td>
-              <td class="border-b text-center">{{ item.to_grupo.nome }}</td>
-              <td class="border-b text-center">{{ item.to_situacao.nome }}</td>
+              <td class="border-b ">{{ item.pessoa_nome }}</td>
+              <td class="border-b text-center">{{ item.dt_operacao }}</td>
+              <td class="border-b text-right">{{ item.val_operacao }}</td>
+              <td class="border-b text-center">{{ item.to_conta.nome }}</td>
+              <td class="border-b text-center">{{ item.to_operacao_tp.nome }}</td>
               <td class="border-b space-x-1 w-24 text-center">
                 <BizButtonEdit
                   @click.prevent="actionEdit(item.id)"
                   v-if="
                     $page.props.auth.user.permissions.includes(
-                      'gestao_campanhas.edit'
+                      'contribuicoes.edit'
                     )
                   "
                 />
@@ -253,7 +230,7 @@ onMounted(() => {
                   @click.prevent="showConfirmModal(item.id)"
                   v-if="
                     $page.props.auth.user.permissions.includes(
-                      'gestao_campanhas.destroy'
+                      'contribuicoes.destroy'
                     )
                   "
                 />

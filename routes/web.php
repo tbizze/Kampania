@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CampanhaController;
 use App\Http\Controllers\CampPessoaPivotController;
+use App\Http\Controllers\ContribuicaoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PessoaController;
 use Illuminate\Foundation\Application;
@@ -141,6 +142,11 @@ Route::middleware([
     Route::resource('gestao-campanhas', CampPessoaPivotController::class)
     ->parameters([
         'gestao-campanhas' => 'campPessoaPivot'
+    ]);
+
+    Route::resource('contribuicoes', ContribuicaoController::class)
+    ->parameters([
+        'contribuicoes' => 'contribuicao'
     ]);
 
     /**
