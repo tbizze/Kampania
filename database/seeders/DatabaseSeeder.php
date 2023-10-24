@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             
             // Permissões e usuário.
-            PermissionSeeder::class,    //criar funções e permissões
+            /* PermissionSeeder::class,    //criar funções e permissões
             UserSeeder::class,          // criar usuários
             
             // Módulo Pessoas.
@@ -30,7 +30,11 @@ class DatabaseSeeder extends Seeder
             CampanhaSeeder::class,
             CampPessoaPivotSeeder::class,
 
-            PessEnderecoSeeder::class,
+            PessEnderecoSeeder::class, */
+
+            //ContaSeeder::class,
+            //OperacaoTpSeeder::class,
+            ContribuicaoSeeder::class,
 
         ]);
 
