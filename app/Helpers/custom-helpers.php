@@ -43,7 +43,7 @@ if (!function_exists('currency_get_db')) {
         if ($number && $number <> 0) {
             return Format::currencyGetDb($number, $decimals, $thousandSeparator);
         }
-        // Como $number é null ou = 0, retorna vazio.
+        // Caso $number é null ou = 0, retorna vazio.
         return '';
 
     }
@@ -78,6 +78,8 @@ if (! function_exists('mask_phone')) {
         if ($phone) {
             return Mask::phone($phone);
         }
+        // Caso $phone é null, retorna vazio.
+        return '';
     }
 }
 
