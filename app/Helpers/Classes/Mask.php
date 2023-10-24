@@ -55,9 +55,12 @@ final class Mask
         if (empty($phone)){
             return '';
         }
-
+        
         $phone = preg_replace('/[^0-9]/', '', (string) $phone);
         throw_if(strlen($phone) < 10 || strlen($phone) > 11, new \Exception('Invalid phone number: ' . $phone));
+        
+        //dd($phone, preg_replace('/(\d{2})(\d{5}|\d{4})(\d{4})/', '($1) $2-$3', $phone), preg_replace('/[^0-9]/', '', (string) $phone));
+
         return preg_replace('/(\d{2})(\d{5}|\d{4})(\d{4})/', '($1) $2-$3', $phone);
     }
 

@@ -65,4 +65,36 @@ if (! function_exists('date_to_db')) {
     }
 }
 
+if (! function_exists('mask_phone')) {
+    /**
+     * Formatar data para BD.
+     *
+     * @param string $date Data a formatar
+     *
+     * @return string Telefone formatado
+     */
+    function mask_phone(string $phone): string
+    {
+        if ($phone) {
+            return Mask::phone($phone);
+        }
+    }
+}
+
+if (! function_exists('capitalize_words')) {
+    /**
+     * Formatar data para BD.
+     *
+     * @param string $date String a formatar
+     *
+     * @return string String formatado
+     */
+    function capitalize_words(string $string): string
+    {
+        if ($string) {
+            return Sanitize::capitalizeEachWords($string);
+        }
+    }
+}
+
 

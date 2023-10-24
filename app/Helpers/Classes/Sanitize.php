@@ -30,7 +30,7 @@ final class Sanitize
     }
 
     /**
-     * Remove special characters from string
+     * Remove caracteres especiais de string
      *
      * @param string $string String to remove special characters
      *
@@ -39,5 +39,20 @@ final class Sanitize
     public static function removeSpecialCharacters(string $string): string
     {
         return preg_replace('/[^a-zA-Z0-9]/', '', $string);
+    }
+
+    /**
+     * Torna maiúsculo o primeiro caractere das palavras de uma string.
+     *
+     * @param string $string String a converter caracteres
+     *
+     * @return string String Convertido os caracteres
+     */
+    public static function capitalizeEachWords(string $string)
+    {
+        $search =  array('Da ', 'Das ', 'De ', 'Do ', 'Dos ', 'A ', 'As ', 'E ', 'O ', 'Os ', 'Em');
+        $replace = array('da ', 'das ', 'de ', 'do ', 'dos ', 'a ', 'as ', 'e ', 'o ', 'os ', 'em');
+
+        return ucfirst(str_replace($search, $replace, ucwords(strtolower($string))));
     }
 }
