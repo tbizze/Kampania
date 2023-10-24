@@ -21,6 +21,8 @@ class TrimDuplicateSpaces implements RequestSanitizerContract
      */
     public function sanitize($input)
     {
-        return preg_replace('~\s{2,}~', ' ', $input);
+        if ($input) {
+            return preg_replace('~\s{2,}~', ' ', $input);
+        }
     }
 }

@@ -36,6 +36,7 @@ trait RequestSanitizer
                 // Caso a requisição não possua uma propriedade para esta chave, não há necessidade de higienizar nada.
                 continue;
             }
+            //dd($input);
 
             $sanitizers = (array) $sanitizers;
 
@@ -46,6 +47,7 @@ trait RequestSanitizer
                         $value = \App\Traits\RequestSanitizers\DateToDb::class;
                         break;
                     case 'NullToFalse':
+                        //dd('test null');
                         $value = \App\Traits\RequestSanitizers\NullToFalse::class;
                         break;
                     case 'CurrencyToDb':
@@ -66,8 +68,11 @@ trait RequestSanitizer
                     case 'Uppercase':
                         $value = \App\Traits\RequestSanitizers\Uppercase::class;
                         break;
+                    case 'TrimDuplicateSpaces':
+                        $value = \App\Traits\RequestSanitizers\TrimDuplicateSpaces::class;
+                        break;
                 }
-
+                
                 if (is_string($key)) {
                     $sanitizer = app()->make($key, $value);
                 } elseif (is_string($value)) {
@@ -77,7 +82,7 @@ trait RequestSanitizer
                 } else {
                     throw new InvalidArgumentException('Não foi possível resolver o \'sanitizer\' de determinadas propriedades');
                 }
-
+                //dd('test',$sanitizer->sanitize($this->input($form_input, null)));
                 //dd(Arr::set($input, $form_input, $sanitizer->sanitize($this->input($form_input, null))));
 
                 // Remonta como array o $input. Cada chave passada no FormRequest.

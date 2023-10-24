@@ -7,7 +7,7 @@ use App\Traits\Contracts\RequestSanitizerContract;
 /**
  * Recebe um $input 'null' devolvendo como 'false'.
  *
- * Class RemoveNonNumeric
+ * Class NullToFalse
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */

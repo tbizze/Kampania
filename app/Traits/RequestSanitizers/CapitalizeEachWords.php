@@ -21,8 +21,12 @@ class CapitalizeEachWords implements RequestSanitizerContract
      */
     public function sanitize($input)
     {
+        /* $search =  array('Da ', 'Das ', 'De ', 'Do ', 'Dos ', 'A ', 'As ', 'E ', 'O ', 'Os ', 'Em');
+        $replace = array('da ', 'das ', 'de ', 'do ', 'dos ', 'a ', 'as ', 'e ', 'o ', 'os ', 'em'); */
         if ($input) {
-            return ucwords($input);
+            return capitalize_words($input);
+            //return ucwords($input);
+            //return str_replace($search, $replace, ucwords(strtolower($input)));
         }
     }
 }
