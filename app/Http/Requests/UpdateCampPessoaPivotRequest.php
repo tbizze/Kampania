@@ -55,6 +55,6 @@ class UpdateCampPessoaPivotRequest extends FormRequest
         'dt_encerramento' => ['DateToDb'],
         'notif_email' => ['NullToFalse'],
         'notif_whatsapp' => ['NullToFalse'],
-        'valor' => ['CurrencyToDb'], 
+        'valor' => ['CurrencyToDb'],
     ];
 }

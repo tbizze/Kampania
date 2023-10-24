@@ -44,14 +44,14 @@ class UpdatePessoaRequest extends FormRequest
 
             // Regras de validações de Endereços
             'logradouro' => 'nullable|string|min:3|max:130',
-            'numero' => 'nullable|string|max:8',
+            'numero' => 'nullable|string|max:10',
             'complemento' => 'nullable|string|min:3|max:20',
             'bairro' => 'nullable|string|min:3|max:50',
             'cep' => 'nullable|digits:8',
             'cidade' => 'nullable|string|min:3|max:100',
             'uf' => 'nullable|string|size:2',
             'principal' => 'nullable|boolean',
-            'notas' => 'nullable|string|min:3|max:255',
+            //'notas' => 'nullable|string|min:3|max:255',
             'pessoa_id' => 'nullable|integer',
         ];
     }
@@ -67,16 +67,20 @@ class UpdatePessoaRequest extends FormRequest
 
     /**
      * Propriedade protegida para definir quais atributos do request serão tratados antes da validação.
-     * Usa o pacote 'Mawuekom\RequestSanitizer'. 
+     * Usa o Trait 'RequestSanitizer'. 
      */
     protected $sanitizers = [
         'dt_nasc' => ['DateToDb'],
         'dt_casamento' => ['DateToDb'],
         'celular' => ['RemoveNonNumeric'],
-        'nome' => ['Capitalize'],
-        'conjuge' => ['Capitalize'],
+        'nome' => ['CapitalizeEachWords','TrimDuplicateSpaces'],
+        'conjuge' => ['CapitalizeEachWords','TrimDuplicateSpaces'],
+        'profissao' => ['Capitalize','TrimDuplicateSpaces'],
 
         'cep' => ['RemoveNonNumeric'],
         'uf' => ['Uppercase'],
+        'logradouro' => ['CapitalizeEachWords','TrimDuplicateSpaces'],
+        'bairro' => ['CapitalizeEachWords','TrimDuplicateSpaces'],
+        'cidade' => ['CapitalizeEachWords','TrimDuplicateSpaces'],
     ];
 }
