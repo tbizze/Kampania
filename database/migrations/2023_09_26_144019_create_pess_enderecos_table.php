@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pess_enderecos', function (Blueprint $table) {
             $table->id();
             $table->string('logradouro', 130)->nullable();
-            $table->string('numero', 6)->nullable();
+            $table->string('numero', 10)->nullable();
             $table->string('complemento', 20)->nullable();
             $table->string('bairro', 50)->nullable();
             $table->string('cep', 8)->nullable();
