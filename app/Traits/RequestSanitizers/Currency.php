@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\BizSanitizers;
+namespace App\Traits\RequestSanitizers;
 
 use App\Traits\Contracts\RequestSanitizerContract;
 
@@ -11,7 +11,7 @@ use App\Traits\Contracts\RequestSanitizerContract;
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */
-class NumberToDb implements RequestSanitizerContract
+class Currency implements RequestSanitizerContract
 {
     /**
      * Sanitize an input and return it.

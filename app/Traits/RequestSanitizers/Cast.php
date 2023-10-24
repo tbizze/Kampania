@@ -1,9 +1,9 @@
 <?php
 
-namespace Mawuekom\RequestSanitizer\Sanitizers;
+namespace App\Traits\RequestSanitizers;
 
 use Illuminate\Support\Collection;
-use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
+use App\Traits\Contracts\RequestSanitizerContract;
 
 /**
  * Casts a variable into the given type.
@@ -12,7 +12,7 @@ use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */
-class Cast implements SanitizerContract
+class Cast implements RequestSanitizerContract
 {
     /**
      * Sanitize an input and return it.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mawuekom\RequestSanitizer\Sanitizers;
+namespace App\Traits\RequestSanitizers;
 
-use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
+use App\Traits\Contracts\RequestSanitizerContract;
 
 /**
  * Remove HTML tags and encode special characters from the given string.
@@ -11,7 +11,7 @@ use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */
-class EscapeHTML implements SanitizerContract
+class EscapeHTML implements RequestSanitizerContract
 {
     /**
      * Sanitize an input and return it.

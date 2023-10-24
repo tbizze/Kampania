@@ -1,8 +1,8 @@
 <?php
 
-namespace Mawuekom\RequestSanitizer\Sanitizers;
+namespace App\Traits\RequestSanitizers;
 
-use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
+use App\Traits\Contracts\RequestSanitizerContract;
 
 /**
  * Simple PHP filter_var sanitizer
@@ -11,7 +11,7 @@ use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */
-class FilterVars implements SanitizerContract
+class FilterVars implements RequestSanitizerContract
 {
     private $filter;
     private $options;

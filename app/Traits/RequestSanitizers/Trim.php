@@ -1,8 +1,8 @@
 <?php
 
-namespace Mawuekom\RequestSanitizer\Sanitizers;
+namespace App\Traits\RequestSanitizers;
 
-use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
+use App\Traits\Contracts\RequestSanitizerContract;
 
 /**
  * Simple PHP trim() implementation
@@ -11,7 +11,7 @@ use Mawuekom\RequestSanitizer\Contracts\SanitizerContract;
  *
  * @package Mawuekom\RequestSanitizer\Sanitizers
  */
-class Trim implements SanitizerContract
+class Trim implements RequestSanitizerContract
 {
     /**
      * Sanitize an input and return it.
