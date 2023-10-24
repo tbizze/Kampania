@@ -39,9 +39,13 @@ if (!function_exists('currency_get_db')) {
         int $decimals = 2,
         string $thousandSeparator = ''
     ): string {
-        if ($number) {
+        // Se existe $number e for diferente de 0, então mascara.
+        if ($number && $number <> 0) {
             return Format::currencyGetDb($number, $decimals, $thousandSeparator);
         }
+        // Como $number é null ou = 0, retorna vazio.
+        return '';
+
     }
 }
 

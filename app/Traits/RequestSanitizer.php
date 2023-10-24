@@ -78,7 +78,7 @@ trait RequestSanitizer
                     throw new InvalidArgumentException('Não foi possível resolver o \'sanitizer\' de determinadas propriedades');
                 }
 
-                //dd($sanitizer->sanitize($this->input($form_input, null)));
+                //dd(Arr::set($input, $form_input, $sanitizer->sanitize($this->input($form_input, null))));
 
                 // Remonta como array o $input. Cada chave passada no FormRequest.
                 // $sanitizer->sanitize, isto invoca a classe informada no FormRequest para essa coluna da tabela do BD.
@@ -87,6 +87,8 @@ trait RequestSanitizer
                 $this->replace($input);
             }
         }
+
+        //dd($input);
 
         return $this->replace($input);
     }

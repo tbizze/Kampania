@@ -22,6 +22,11 @@ class CampanhaSeeder extends Seeder
                 'dt_inicio' => '2022-11-30',
                 'notas' => 'Primeira etapa da campanha.'
             ],
+            [
+                'nome_campanha' => 'Dízimo',
+                'dt_inicio' => '2022-11-30',
+                'notas' => 'Primeira etapa da campanha.'
+            ],
         ];
 
         foreach ($items as $item) {

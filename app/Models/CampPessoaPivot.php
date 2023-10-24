@@ -50,7 +50,7 @@ class CampPessoaPivot extends Model
     protected function valor(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => currency_get_db($value),
+            get: fn ($value) => currency_get_db(!$value ? 0 : $value),
         );
     }
 

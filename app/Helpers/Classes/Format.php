@@ -53,6 +53,7 @@ final class Format
      */
     public static function dateToDb(string $date): string
     {
+        //dd($date);
         // Quebra o $input em três partes: dia/mês/ano.
         $date_string = Str::of($date)->explode('/');
 

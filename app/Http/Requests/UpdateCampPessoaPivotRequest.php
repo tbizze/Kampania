@@ -8,7 +8,7 @@ use App\Traits\RequestSanitizer;
 class UpdateCampPessoaPivotRequest extends FormRequest
 {
     // Pacote para tratar inputs (Mawuekom\RequestSanitizer). 
-    use RequestSanitizer; 
+    use RequestSanitizer;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -43,7 +43,7 @@ class UpdateCampPessoaPivotRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         // Invoca função para sanitizar Inputs
-        $this ->sanitize();
+        $this->sanitize();
     }
 
     /**
@@ -56,5 +56,5 @@ class UpdateCampPessoaPivotRequest extends FormRequest
         'notif_email' => ['NullToFalse'],
         'notif_whatsapp' => ['NullToFalse'],
         'valor' => ['CurrencyToDb'], 
-     ];  
+    ];
 }

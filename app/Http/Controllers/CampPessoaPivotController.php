@@ -82,6 +82,10 @@ class CampPessoaPivotController extends Controller
             $query->whereIn('valor', $vl);
         });
 
+        // FILTRO CAMPANHA: Aqui é filtrado para exibir somente itens da Campanha,
+        // futuramente, podemos implementar funcionalidade do dízimo.
+        $campanhas->where('campanha_id',1);
+
         // 4) Aplica ordem a Query => realiza o OrderBy.
         // Se acionado alguma coluna de ordenar, realiza o OrderBy.
         $campanhas->when(
