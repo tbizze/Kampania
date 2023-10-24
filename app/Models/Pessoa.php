@@ -51,7 +51,7 @@ class Pessoa extends Model
     {
         return Attribute::make(
             // Se o $this->'valor' for vazio, passa '' para evitar que seja nulo.
-            get: fn() => mask_phone($this->celular ? $this->celular : ''),
+            get: fn() => mask_phone(!$this->celular ? '' : $this->celular),
         );
     }
 

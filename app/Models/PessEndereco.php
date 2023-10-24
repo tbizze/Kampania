@@ -20,7 +20,7 @@ class PessEndereco extends Model
      * Lista des campos em que é permitido a persistência no BD.. 
      */
     protected $fillable = [
-        'logradouro', 'numero', 'bairro', 'complemento', 'cep', 'cidade', 'uf', 'notas','pessoa_id'
+        'logradouro', 'numero', 'bairro', 'complemento', 'cep', 'cidade', 'uf', 'pessoa_id', //'notas',
     ];
 
     /**
@@ -29,7 +29,6 @@ class PessEndereco extends Model
      */
     public function toPessoa(): BelongsTo
     {
-        return $this->belongsTo(Pessoa::class,'pessoa_id')->withDefault(['nome' => 'N/D']);
+        return $this->belongsTo(Pessoa::class, 'pessoa_id')->withDefault(['nome' => 'N/D']);
     }
-
 }

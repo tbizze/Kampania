@@ -89,15 +89,6 @@ function showConfirmModal(vl) {
   isShowModal.value = true; // Exibe o modal.
   registro_id.value = vl; // Coloca o ID na variável.
 }
-/**
- * Função para formatar data.
- * Recebe no padrão MySQL (Y-m-d) e entrega formato brasileiro (dd/mm/aaa).
- */
-function formataData(str) {
-  if(str){
-    return str.split('-').reverse().join('/');
-  }
-}
 
 /**
  * Ação para formatar o 'grupo_id' recebido do controller.
@@ -204,8 +195,31 @@ onMounted(() => {
                 </BizTheadOrder>
               </th>
               <th class="text-center">Código</th>
-              <th class="text-rigth">Valor</th>
-              <th class="text-center">Dt. Adesão</th>
+              <!-- <th class="text-rigth">Valor</th> -->
+              <th
+                class="hover:text-accent cursor-pointer"
+                @click="sort('valor')"
+              >
+                <BizTheadOrder
+                  :field="form.field"
+                  coluna="valor"
+                  :direction="form.direction"
+                >
+                  Valor
+                </BizTheadOrder>
+              </th>
+              <th
+                class="hover:text-accent cursor-pointer"
+                @click="sort('dt_adesao')"
+              >
+                <BizTheadOrder
+                  :field="form.field"
+                  coluna="dt_adesao"
+                  :direction="form.direction"
+                >
+                  Dt. Adesão
+                </BizTheadOrder>
+              </th>
               <th class="text-center">Dt. Encerramento</th>
               <th class="text-center">Grupo</th>
               <th class="text-center">Situação</th>

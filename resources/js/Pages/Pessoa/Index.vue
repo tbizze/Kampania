@@ -187,7 +187,7 @@ onMounted(() => {
               <td class="text-center">{{ item.sexo }}</td>
               <td class="text-center">{{ item.codigo }}</td>
               <td class="text-center">{{ item.dt_nasc }}</td>
-              <td class="">{{ item.celular }}</td>
+              <td class="">{{ item.formatted_celular }}</td>
               <td class="">{{ item.email }}</td>
               <td class="space-x-1 w-24">
                 <BizButtonEdit

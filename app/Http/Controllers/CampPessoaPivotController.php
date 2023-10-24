@@ -27,21 +27,10 @@ class CampPessoaPivotController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->grupo_id);
-        // Verifica se o campo 'grupo_id' tem dados. Se tiver irá limpar.
-        /* if ($request->camp_gpo_id){
-            $request->camp_gpo_id = preg_replace('/[^\d\-]/','', $request->camp_gpo_id); // limpa permitindo somente números.
-            $request->camp_gpo_id = array_map('intval', $request->camp_gpo_id); // transforma o array string em array number.
-        }
-        if ($request->camp_sit_id){
-            $request->camp_sit_id = preg_replace('/[^\d\-]/','', $request->camp_sit_id); // limpa permitindo somente números.
-            $request->camp_sit_id = array_map('intval', $request->camp_sit_id); // transforma o array string em array number.
-        } */
-
         // 1) Valida os dados submetidos
         $request->validate([
             'direction' => ['in:asc,desc'],
-            'field'     => ['in:nome'],
+            'field'     => ['in:nome,dt_adesao,valor'],
         ]);
 
         // 2) Instancia o modelo:
